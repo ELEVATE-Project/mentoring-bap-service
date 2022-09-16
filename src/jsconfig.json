@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es6",
+		"baseUrl": "./",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"paths": {
+			"@configs*": ["./configs*"],
+			"@constants*": ["./constants*"],
+			"@controllers*": ["./controllers*"],
+			"@db*": ["./db*"],
+			"@generics*": ["./generics*"],
+			"@health-checks*": ["./health-checks*"],
+			"@middlewares*": ["./middlewares*"],
+			"@public*": ["./public*"],
+			"@routes*": ["./routes*"],
+			"@services*": ["./services*"],
+			"@validators*": ["./validators*"]
+		}
+	},
+	"exclude": ["node_modules", "@shelf/jest-mongodb"]
+}

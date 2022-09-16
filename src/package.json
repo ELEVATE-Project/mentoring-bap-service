@@ -1,0 +1,45 @@
+{
+  "name": "mentoring-bap-service",
+  "version": "1.0.0",
+  "description": "Beckn Bap Service For ELEVATE",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ELEVATE-Project/mentoring-bap-service.git"
+  },
+  "keywords": [
+    "Beckn",
+    "Bap",
+    "Elevate",
+    "DSEP"
+  ],
+  "author": "Joffin Joy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ELEVATE-Project/mentoring-bap-service/issues"
+  },
+  "homepage": "https://github.com/ELEVATE-Project/mentoring-bap-service#readme",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.17.1",
+    "module-alias": "^2.2.2",
+    "mongodb": "^4.1.2",
+	"mongoose": "^6.1.6"
+	
+  },
+  "devDependencies": {
+		"eslint": "^8.16.0",
+		"husky": "^8.0.1",
+		"jest": "^28.1.1",
+		"lint-staged": "^12.4.1",
+		"nodemon": "^2.0.13",
+		"prettier": "^2.6.2"
+	},
+	"lint-staged": {
+		"../*": "prettier --ignore-unknown --write",
+		"*": "prettier --ignore-unknown --write"
+	}
+}
