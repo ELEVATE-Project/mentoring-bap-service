@@ -4,8 +4,6 @@ const { requestBodyGenerator } = require('@utils/requestBodyGenerator')
 
 exports.triggerSearch = async (req, res) => {
 	try {
-		console.log(req.query.keyword)
-		console.log('Trigger Search')
 		const response = await requester.postRequest(
 			process.env.BECKN_BG_URI + '/search',
 			{},
