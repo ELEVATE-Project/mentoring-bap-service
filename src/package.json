@@ -23,6 +23,8 @@
 	},
 	"homepage": "https://github.com/ELEVATE-Project/mentoring-bap-service#readme",
 	"dependencies": {
+		"axios": "^0.27.2",
+		"cors": "^2.8.5",
 		"dotenv": "^16.0.2",
 		"express": "^4.17.1",
 		"module-alias": "^2.2.2",
@@ -34,11 +36,20 @@
 		"husky": "^8.0.1",
 		"jest": "^28.1.1",
 		"lint-staged": "^12.4.1",
-		"nodemon": "^2.0.13",
+		"nodemon": "^2.0.20",
 		"prettier": "^2.6.2"
 	},
 	"lint-staged": {
 		"../*": "prettier --ignore-unknown --write",
 		"*": "prettier --ignore-unknown --write"
+	},
+	"_moduleAliases": {
+		"@root": ".",
+		"@controllers": "controllers",
+		"@database": "database",
+		"@routes": "routes",
+		"@config": "config",
+		"@utils": "utils",
+		"@tests": "tests"
 	}
 }
