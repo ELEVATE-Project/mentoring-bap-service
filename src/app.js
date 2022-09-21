@@ -14,8 +14,8 @@ app.use(require('@routes'))
 
 app.listen(process.env.APPLICATION_PORT, (res, err) => {
 	if (err) onError(err)
-	console.log('Application Environment: ' + process.env.NODE_ENV)
-	console.log('Application is running on the port:' + process.env.APPLICATION_PORT)
+	console.log('BAP Environment: ' + process.env.NODE_ENV)
+	console.log('BAP is running on the port:' + process.env.APPLICATION_PORT)
 })
 
 function onError(error) {

@@ -1,10 +1,14 @@
 'use strict'
+
 const requestBody = {
 	context: {
 		domain: process.env.DOMAIN,
 		country: process.env.COUNTRY,
 		city: process.env.CITY,
 		action: 'temp',
+		bap_id: process.env.BAP_ID,
+		bap_uri: process.env.BAP_URI,
+		timestamp: new Date().toISOString(),
 	},
 	message: {
 		intent: {

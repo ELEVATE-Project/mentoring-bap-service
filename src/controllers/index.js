@@ -9,11 +9,10 @@ exports.triggerSearch = async (req, res) => {
 			{},
 			requestBodyGenerator('bg_search', { keyword: req.query.keyword })
 		)
-		console.log(response.data)
-		res.status(200).json(response.data)
+		res.status(200).send(response.data)
 	} catch (err) {
 		console.log(err)
-		res.status(400).json({ status: false })
+		res.status(400).send({ status: false })
 	}
 }
 
