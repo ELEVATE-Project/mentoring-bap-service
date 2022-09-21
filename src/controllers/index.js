@@ -18,7 +18,7 @@ exports.triggerSearch = async (req, res) => {
 
 exports.onSearch = async (req, res) => {
 	try {
-		console.log('On Search')
-		res.status(200).json({ status: true })
+		console.debug(JSON.stringify(req.body, null, '\t'))
+		res.status(200).json({ status: true, message: 'BAP Received Data From BPP' })
 	} catch (err) {}
 }
