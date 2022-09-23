@@ -1,0 +1,38 @@
+version: '3'
+services:
+  redis:
+    image: 'redis:7.0.0'
+    restart: 'always'
+    expose:
+      - '6379'
+    networks:
+      - elevate_beckn_net
+    logging:
+      driver: none
+  bap:
+    build: './'
+    image: elevate/bap:1.0
+    volumes:
+      - ./src/:/var/src
+    ports:
+      - '3004:3004'
+    command: ['nodemon', 'app.js']
+    depends_on:
+      - redis
+    networks:
+      - elevate_beckn_net
+  bpp:
+    build: '../mentoring-bpp-service/'
+    image: elevate/bpp:1.0
+    volumes:
+      - ../mentoring-bpp-service/src/:/var/src
+    ports:
+      - '3005:3005'
+    command: ['nodemon', 'app.js']
+    depends_on:
+      - redis
+    networks:
+      - elevate_beckn_net
+networks:
+  elevate_beckn_net:
+    external: false
