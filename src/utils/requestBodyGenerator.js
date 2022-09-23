@@ -1,5 +1,4 @@
 'use strict'
-
 const requestBody = {
 	context: {
 		domain: process.env.DOMAIN,
@@ -19,10 +18,11 @@ const requestBody = {
 	},
 }
 
-exports.requestBodyGenerator = (api, body) => {
+exports.requestBodyGenerator = (api, body, transactionId) => {
 	if (api === 'bg_search') {
 		requestBody.context.action = 'search'
 		requestBody.message.intent.descriptor.name = body.keyword
+		requestBody.context.transaction_id = transactionId
 		requestBody.message.intent = {
 			...requestBody.message.intent,
 			...{ item: { descriptor: { name: body.keyword } } },
