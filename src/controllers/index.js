@@ -4,7 +4,7 @@ const { requestBodyGenerator } = require('@utils/requestBodyGenerator')
 const { cacheSave, cacheGet } = require('@utils/redis')
 const { v4: uuidv4 } = require('uuid')
 
-exports.triggerSearch = async (req, res) => {
+exports.search = async (req, res) => {
 	try {
 		const transactionId = uuidv4()
 		await requester.postRequest(
