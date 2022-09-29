@@ -23,7 +23,6 @@
 	},
 	"homepage": "https://github.com/ELEVATE-Project/mentoring-bap-service#readme",
 	"dependencies": {
-		"@faker-js/faker": "^7.5.0",
 		"axios": "^0.27.2",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.2",
