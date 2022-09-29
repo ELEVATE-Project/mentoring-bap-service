@@ -10,7 +10,6 @@ client.connect()
 
 exports.cacheGet = async (key) => {
 	const data = await client.get(key)
-	//console.log(data)
 	if (data) return JSON.parse(data)
 	else return null
 }

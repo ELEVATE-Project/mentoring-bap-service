@@ -25,12 +25,12 @@ exports.search = async (req, res) => {
 
 exports.onSearch = async (req, res) => {
 	try {
-		//console.debug(JSON.stringify(req.body, null, '\t'))
 		const transactionId = req.body.context.transaction_id
-		//console.log(transactionId)
 		const data = await cacheGet(transactionId)
-		if (data) await cacheSave(transactionId, data.push(req.body))
-		else await cacheSave(transactionId, [req.body])
+		if (data) {
+			data.push(req.body)
+			await cacheSave(transactionId, data)
+		} else await cacheSave(transactionId, [req.body])
 		res.status(200).json({ status: true, message: 'BAP Received Data From BPP' })
 	} catch (err) {}
 }
