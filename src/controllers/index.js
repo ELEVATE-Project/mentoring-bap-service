@@ -26,8 +26,6 @@ exports.search = async (req, res) => {
 
 exports.onSearch = async (req, res) => {
 	try {
-		console.log('BAP ONSEARCH')
-		console.log(req.body)
 		const transactionId = req.body.context.transaction_id
 		const messageId = req.body.context.message_id
 		console.log(transactionId)
@@ -66,7 +64,6 @@ exports.init = async (req, res) => {
 
 exports.onInit = async (req, res) => {
 	try {
-		console.log(req.body)
 		const transactionId = req.body.context.transaction_id
 		const messageId = req.body.context.message_id
 		await cacheSave(`${transactionId}:${messageId}:ON_INIT`, req.body)
