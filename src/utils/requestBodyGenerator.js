@@ -35,7 +35,7 @@ exports.requestBodyGenerator = (api, body, transactionId, messageId) => {
 			order: {
 				id: uuidv4(),
 				items: [{ id: body.itemId }],
-				fulfillment: [{ id: body.fulfillmentId }],
+				fulfillments: [{ id: body.fulfillmentId }],
 				billing: {
 					name: faker.name.fullName(),
 					phone: faker.phone.phoneNumber(),

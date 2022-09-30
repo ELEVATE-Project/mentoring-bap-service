@@ -26,8 +26,12 @@ exports.search = async (req, res) => {
 
 exports.onSearch = async (req, res) => {
 	try {
+		console.log('BAP ONSEARCH')
+		console.log(req.body)
 		const transactionId = req.body.context.transaction_id
 		const messageId = req.body.context.message_id
+		console.log(transactionId)
+		console.log(messageId)
 		const data = await cacheGet(transactionId)
 		if (data) {
 			data.push(req.body)
@@ -41,11 +45,11 @@ exports.init = async (req, res) => {
 	try {
 		const transactionId = req.body.transaction_id
 		const messageId = uuidv4()
-		const bppURI = req.body.bppUri
+		const bppUri = req.body.bppUri
 		const itemId = req.body.itemId
 		const fulfillmentId = req.body.fulfillmentId
 		await requester.postRequest(
-			bppURI + '/init',
+			bppUri + '/init',
 			{},
 			requestBodyGenerator('bpp_init', { itemId, fulfillmentId }, transactionId, messageId)
 		)
@@ -62,6 +66,7 @@ exports.init = async (req, res) => {
 
 exports.onInit = async (req, res) => {
 	try {
+		console.log(req.body)
 		const transactionId = req.body.context.transaction_id
 		const messageId = req.body.context.message_id
 		await cacheSave(`${transactionId}:${messageId}:ON_INIT`, req.body)
@@ -73,11 +78,11 @@ exports.confirm = async (req, res) => {
 	try {
 		const transactionId = req.body.transaction_id
 		const messageId = uuidv4()
-		const bppURI = req.body.bppUri
+		const bppUri = req.body.bppUri
 		const itemId = req.body.itemId
 		const fulfillmentId = req.body.fulfillmentId
 		await requester.postRequest(
-			bppURI + '/init',
+			bppUri + '/confirm',
 			{},
 			requestBodyGenerator('bpp_init', { itemId, fulfillmentId }, transactionId, messageId)
 		)
