@@ -1,4 +1,7 @@
 'use strict'
+const { v4: uuidv4 } = require('uuid')
+const { faker } = require('@faker-js/faker')
+
 const requestBody = {
 	context: {
 		domain: process.env.DOMAIN,
@@ -8,24 +11,40 @@ const requestBody = {
 		bap_id: process.env.BAP_ID,
 		bap_uri: process.env.BAP_URI,
 		timestamp: new Date().toISOString(),
+		message_id: uuidv4(),
 	},
-	message: {
-		intent: {
-			descriptor: {
-				name: 'string',
-			},
-		},
-	},
+	message: {},
 }
 
-exports.requestBodyGenerator = (api, body, transactionId) => {
+exports.requestBodyGenerator = (api, body, transactionId, messageId) => {
+	requestBody.context.transaction_id = transactionId
+	requestBody.context.message_id = messageId
 	if (api === 'bg_search') {
 		requestBody.context.action = 'search'
-		requestBody.message.intent.descriptor.name = body.keyword
-		requestBody.context.transaction_id = transactionId
-		requestBody.message.intent = {
-			...requestBody.message.intent,
-			...{ item: { descriptor: { name: body.keyword } } },
+		requestBody.message = {
+			intent: {
+				descriptor: {
+					name: body.keyword,
+				},
+				item: { descriptor: { name: body.keyword } },
+			},
+		}
+	} else if (api === 'bpp_init') {
+		requestBody.context.action = 'init'
+		requestBody.message = {
+			order: {
+				id: uuidv4(),
+				items: [{ id: body.itemId }],
+				fulfillment: [{ id: body.fulfillmentId }],
+				billing: {
+					name: faker.name.fullName(),
+					phone: faker.phone.phoneNumber(),
+					email: faker.internet.email(),
+					time: {
+						timezone: 'IST',
+					},
+				},
+			},
 		}
 	}
 	return requestBody
