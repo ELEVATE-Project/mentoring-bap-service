@@ -14,4 +14,7 @@ router.post('/on_confirm', bap.onConfirm)
 router.post('/cancel', bap.cancel)
 router.post('/on_cancel', bap.onCancel)
 
+router.post('/status', bap.status)
+router.post('/on_status', bap.onStatus)
+
 module.exports = router

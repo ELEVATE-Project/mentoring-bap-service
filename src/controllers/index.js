@@ -28,8 +28,6 @@ exports.onSearch = async (req, res) => {
 	try {
 		const transactionId = req.body.context.transaction_id
 		const messageId = req.body.context.message_id
-		console.log(transactionId)
-		console.log(messageId)
 		const data = await cacheGet(`${transactionId}:${messageId}:ON_SEARCH`)
 		if (data) {
 			data.push(req.body)
@@ -157,7 +155,7 @@ exports.status = async (req, res) => {
 	}
 }
 
-exports.onCancel = async (req, res) => {
+exports.onStatus = async (req, res) => {
 	try {
 		const transactionId = req.body.context.transaction_id
 		const messageId = req.body.context.message_id
