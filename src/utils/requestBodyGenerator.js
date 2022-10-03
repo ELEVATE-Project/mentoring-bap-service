@@ -57,6 +57,13 @@ exports.requestBodyGenerator = (api, body, transactionId, messageId) => {
 				name: 'Because this course is too lengthy',
 			},
 		}
+	} else if (api === 'bpp_status') {
+		requestBody.context.action = 'status'
+		requestBody.message = {
+			order: {
+				id: body.orderId,
+			},
+		}
 	}
 	return requestBody
 }
