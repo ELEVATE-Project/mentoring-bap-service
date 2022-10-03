@@ -30,7 +30,7 @@ exports.onSearch = async (req, res) => {
 		const messageId = req.body.context.message_id
 		console.log(transactionId)
 		console.log(messageId)
-		const data = await cacheGet(transactionId)
+		const data = await cacheGet(`${transactionId}:${messageId}:ON_SEARCH`)
 		if (data) {
 			data.push(req.body)
 			await cacheSave(`${transactionId}:${messageId}:ON_SEARCH`, data)
