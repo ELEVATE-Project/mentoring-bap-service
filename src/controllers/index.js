@@ -102,3 +102,35 @@ exports.onConfirm = async (req, res) => {
 		res.status(200).json({ status: true, message: 'BAP Received CONFIRM From BPP' })
 	} catch (err) {}
 }
+
+exports.cancel = async (req, res) => {
+	try {
+		const transactionId = req.body.transaction_id
+		const messageId = uuidv4()
+		const bppUri = req.body.bppUri
+		const orderId = req.body.orderId
+		const cancellation_reason_id = 1
+		await requester.postRequest(
+			bppUri + '/cancel',
+			{},
+			requestBodyGenerator('bpp_cancel', { orderId, cancellation_reason_id }, transactionId, messageId)
+		)
+		setTimeout(async () => {
+			const data = await cacheGet(`${transactionId}:${messageId}:ON_CANCEL`)
+			if (!data) res.status(403).send({ message: 'No data Found' })
+			else res.status(200).send({ data: data })
+		}, 1000)
+	} catch (err) {
+		console.log(err)
+		res.status(400).send({ status: false })
+	}
+}
+
+exports.onCancel = async (req, res) => {
+	try {
+		const transactionId = req.body.context.transaction_id
+		const messageId = req.body.context.message_id
+		await cacheSave(`${transactionId}:${messageId}:ON_CANCEL`, req.body)
+		res.status(200).json({ status: true, message: 'BAP Received CANCELLATION From BPP' })
+	} catch (err) {}
+}

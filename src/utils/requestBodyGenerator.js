@@ -46,6 +46,17 @@ exports.requestBodyGenerator = (api, body, transactionId, messageId) => {
 				},
 			},
 		}
+	} else if (api === 'bpp_cancel') {
+		requestBody.context.action = 'cancel'
+		requestBody.message = {
+			order: {
+				id: body.orderId,
+			},
+			cancellation_reason_id: 1,
+			descriptor: {
+				name: 'Because this course is too lengthy',
+			},
+		}
 	}
 	return requestBody
 }
