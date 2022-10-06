@@ -84,7 +84,10 @@ exports.confirm = async (req, res) => {
 		setTimeout(async () => {
 			const data = await cacheGet(`${transactionId}:${messageId}:ON_CONFIRM`)
 			if (!data) res.status(403).send({ message: 'No data Found' })
-			else res.status(200).send({ data: data })
+			else {
+				res.status(200).send({ data: data })
+				await cacheSave(`${bppUri}:${itemId}:ENROLLED`, true)
+			}
 		}, 1000)
 	} catch (err) {
 		console.log(err)
@@ -108,6 +111,7 @@ exports.cancel = async (req, res) => {
 		const bppUri = req.body.bppUri
 		const orderId = req.body.orderId
 		const cancellation_reason_id = 1
+		const itemId = req.body.itemId
 		await requester.postRequest(
 			bppUri + '/cancel',
 			{},
@@ -116,7 +120,10 @@ exports.cancel = async (req, res) => {
 		setTimeout(async () => {
 			const data = await cacheGet(`${transactionId}:${messageId}:ON_CANCEL`)
 			if (!data) res.status(403).send({ message: 'No data Found' })
-			else res.status(200).send({ data: data })
+			else {
+				res.status(200).send({ data: data })
+				await cacheSave(`${bppUri}:${itemId}:ENROLLED`, false)
+			}
 		}, 1000)
 	} catch (err) {
 		console.log(err)
@@ -161,5 +168,13 @@ exports.onStatus = async (req, res) => {
 		const messageId = req.body.context.message_id
 		await cacheSave(`${transactionId}:${messageId}:ON_STATUS`, req.body)
 		res.status(200).json({ status: true, message: 'BAP Received STATUS From BPP' })
+	} catch (err) {}
+}
+
+exports.userEnrollmentStatus = async (req, res) => {
+	try {
+		const bppUri = req.body.bppUri
+		const itemId = req.body.itemId
+		res.status(200).send({ isEnrolled: (await cacheGet(`${bppUri}:${itemId}:ENROLLED`)) ? true : false })
 	} catch (err) {}
 }
