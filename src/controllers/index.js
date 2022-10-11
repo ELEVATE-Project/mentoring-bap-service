@@ -1,7 +1,7 @@
 'use strict'
 const requester = require('@utils/requester')
 const { requestBodyGenerator } = require('@utils/requestBodyGenerator')
-const { cacheSave, cacheGet } = require('@utils/redis')
+const { cacheSave, cacheGet, getKeys } = require('@utils/redis')
 const { v4: uuidv4 } = require('uuid')
 
 exports.search = async (req, res) => {
@@ -86,6 +86,7 @@ exports.confirm = async (req, res) => {
 			if (!data) res.status(403).send({ message: 'No data Found' })
 			else {
 				res.status(200).send({ data: data })
+				console.log(`CONFIRM: ${bppUri}:${itemId}:ENROLLED`)
 				await cacheSave(`${bppUri}:${itemId}:ENROLLED`, true)
 			}
 		}, 1000)
@@ -122,6 +123,7 @@ exports.cancel = async (req, res) => {
 			if (!data) res.status(403).send({ message: 'No data Found' })
 			else {
 				res.status(200).send({ data: data })
+				console.log(`CANCEL: ${bppUri}:${itemId}:ENROLLED`)
 				await cacheSave(`${bppUri}:${itemId}:ENROLLED`, false)
 			}
 		}, 1000)
@@ -177,4 +179,34 @@ exports.userEnrollmentStatus = async (req, res) => {
 		const itemId = req.body.itemId
 		res.status(200).send({ isEnrolled: (await cacheGet(`${bppUri}:${itemId}:ENROLLED`)) ? true : false })
 	} catch (err) {}
+}
+
+exports.enrolledSessions = async (req, res) => {
+	try {
+		const enrollmentStatues = await getKeys('*:*:ENROLLED')
+		let collector = {}
+		await Promise.all(
+			enrollmentStatues.map(async (key) => {
+				const parts = key.split(':')
+				let itemId
+				let bppUri
+				if (parts.length === 5) {
+					bppUri = [parts[0], parts[1], parts[2]].join(':')
+					itemId = parts[3]
+				} else {
+					bppUri = [parts[0], parts[1]].join(':')
+					itemId = parts[2]
+				}
+				const isEnrolled = await cacheGet(key)
+				if (isEnrolled) {
+					//Probably Not Thread Safe
+					if (!collector[bppUri]) collector[bppUri] = [itemId]
+					else collector[bppUri].push(itemId)
+				}
+			})
+		)
+		res.status(200).send(collector)
+	} catch (err) {
+		console
+	}
 }

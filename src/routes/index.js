@@ -18,5 +18,6 @@ router.post('/status', bap.status)
 router.post('/on_status', bap.onStatus)
 
 router.post('/user-enrollment-status', bap.userEnrollmentStatus)
+router.get('/enrolled-sessions', bap.enrolledSessions)
 
 module.exports = router
