@@ -31,8 +31,13 @@ exports.onSearch = async (req, res) => {
 		const data = await cacheGet(`${transactionId}:${messageId}:ON_SEARCH`)
 		if (data) {
 			data.push(req.body)
+			console.log(data)
 			await cacheSave(`${transactionId}:${messageId}:ON_SEARCH`, data)
-		} else await cacheSave(`${transactionId}:${messageId}:ON_SEARCH`, [req.body])
+			await cacheSave('LATEST_ON_SEARCH_RESULT', data)
+		} else {
+			await cacheSave(`${transactionId}:${messageId}:ON_SEARCH`, [req.body])
+			await cacheSave('LATEST_ON_SEARCH_RESULT', [req.body])
+		}
 		res.status(200).json({ status: true, message: 'BAP Received Data From BPP' })
 	} catch (err) {}
 }
@@ -86,8 +91,26 @@ exports.confirm = async (req, res) => {
 			if (!data) res.status(403).send({ message: 'No data Found' })
 			else {
 				res.status(200).send({ data: data })
-				console.log(`CONFIRM: ${bppUri}:${itemId}:ENROLLED`)
-				await cacheSave(`${bppUri}:${itemId}:ENROLLED`, true)
+				const latestOnSearchResult = await cacheGet('LATEST_ON_SEARCH_RESULT')
+				let session
+				if (latestOnSearchResult) {
+					for (let i = 0; i < latestOnSearchResult.length; i++) {
+						const currentBppResponse = latestOnSearchResult[i]
+						if (currentBppResponse.context.bpp_uri === bppUri) {
+							const category = currentBppResponse.message.catalog['bpp/categories'][itemId - 1]
+							const item = currentBppResponse.message.catalog['bpp/providers'][itemId - 1]
+							const fulfillment = currentBppResponse.message.catalog['fulfillments'][itemId - 1]
+							session = {
+								category,
+								item,
+								fulfillment,
+							}
+						}
+					}
+				} else {
+					res.status(400).send({ status: false, reason: 'No Latest On Search Result' })
+				}
+				await cacheSave(`${bppUri}:${itemId}:ENROLLED`, session)
 			}
 		}, 1000)
 	} catch (err) {
@@ -123,7 +146,6 @@ exports.cancel = async (req, res) => {
 			if (!data) res.status(403).send({ message: 'No data Found' })
 			else {
 				res.status(200).send({ data: data })
-				console.log(`CANCEL: ${bppUri}:${itemId}:ENROLLED`)
 				await cacheSave(`${bppUri}:${itemId}:ENROLLED`, false)
 			}
 		}, 1000)
@@ -197,11 +219,11 @@ exports.enrolledSessions = async (req, res) => {
 					bppUri = [parts[0], parts[1]].join(':')
 					itemId = parts[2]
 				}
-				const isEnrolled = await cacheGet(key)
-				if (isEnrolled) {
+				const session = await cacheGet(key)
+				if (session) {
 					//Probably Not Thread Safe
-					if (!collector[bppUri]) collector[bppUri] = [itemId]
-					else collector[bppUri].push(itemId)
+					if (!collector[bppUri]) collector[bppUri] = [session]
+					else collector[bppUri].push(session)
 				}
 			})
 		)
