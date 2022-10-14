@@ -100,10 +100,14 @@ exports.confirm = async (req, res) => {
 							const category = currentBppResponse.message.catalog['bpp/categories'][itemId - 1]
 							const item = currentBppResponse.message.catalog['bpp/providers'][itemId - 1]
 							const fulfillment = currentBppResponse.message.catalog['fulfillments'][itemId - 1]
+							const bpp = currentBppResponse.message.catalog['bpp/descriptor']
+							const provider = currentBppResponse.message.catalog['bpp/providers'][itemId - 1]
 							session = {
 								category,
 								item,
 								fulfillment,
+								bpp,
+								provider,
 							}
 						}
 					}
