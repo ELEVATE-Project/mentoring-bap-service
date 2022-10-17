@@ -11,7 +11,6 @@ exports.search = async (req, res) => {
 		const messageId = uuidv4()
 		const requestBody = requestBodyGenerator('bg_search', { keyword: req.query.keyword }, transactionId, messageId)
 		const authorizationHeader = await createAuthorizationHeader(requestBody)
-		console.log('AUTHORIZATION: ', authorizationHeader)
 		await requester.postRequest(
 			process.env.BECKN_BG_URI + '/search',
 			{
