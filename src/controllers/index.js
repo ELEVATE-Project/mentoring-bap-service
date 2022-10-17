@@ -1,6 +1,7 @@
 'use strict'
 const requester = require('@utils/requester')
 const { requestBodyGenerator } = require('@utils/requestBodyGenerator')
+const { createAuthorizationHeader } = require('@utils/auth')
 const { cacheSave, cacheGet, getKeys } = require('@utils/redis')
 const { v4: uuidv4 } = require('uuid')
 
@@ -8,10 +9,12 @@ exports.search = async (req, res) => {
 	try {
 		const transactionId = uuidv4()
 		const messageId = uuidv4()
+		const requestBody = requestBodyGenerator('bg_search', { keyword: req.query.keyword }, transactionId, messageId)
+		const authorizationHeader = createAuthorizationHeader(requestBody)
 		await requester.postRequest(
 			process.env.BECKN_BG_URI + '/search',
-			{},
-			requestBodyGenerator('bg_search', { keyword: req.query.keyword }, transactionId, messageId)
+			{ authorization: authorizationHeader },
+			requestBody
 		)
 		setTimeout(async () => {
 			const data = await cacheGet(`${transactionId}:${messageId}:ON_SEARCH`)
