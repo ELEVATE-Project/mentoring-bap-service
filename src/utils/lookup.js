@@ -19,7 +19,6 @@ exports.getSubscriberDetails = async (subscriberId, uniqueKeyId) => {
 exports.registryLookup = async (lookupParameter) => {
 	try {
 		const response = await axios.post(process.env.BECKN_REGISTRY_URI + '/lookup', lookupParameter)
-		console.log('LOOK UP RESONSE: ', response.data)
 		const subscribers = []
 		response.data.forEach((data) => {
 			try {
