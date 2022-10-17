@@ -10,10 +10,13 @@ exports.search = async (req, res) => {
 		const transactionId = uuidv4()
 		const messageId = uuidv4()
 		const requestBody = requestBodyGenerator('bg_search', { keyword: req.query.keyword }, transactionId, messageId)
-		const authorizationHeader = createAuthorizationHeader(requestBody)
+		const authorizationHeader = await createAuthorizationHeader(requestBody)
+		console.log('AUTHORIZATION: ', authorizationHeader)
 		await requester.postRequest(
 			process.env.BECKN_BG_URI + '/search',
-			{ authorization: authorizationHeader },
+			{
+				authorization: authorizationHeader,
+			},
 			requestBody
 		)
 		setTimeout(async () => {

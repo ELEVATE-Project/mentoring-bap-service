@@ -12,6 +12,8 @@ const requestBody = {
 		bap_uri: process.env.BAP_URI,
 		timestamp: new Date().toISOString(),
 		message_id: uuidv4(),
+		core_version: '1.0.0',
+		ttl: 'PT1S',
 	},
 	message: {},
 }
