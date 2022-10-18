@@ -1,7 +1,6 @@
 'use strict'
 const requester = require('@utils/requester')
 const { requestBodyGenerator } = require('@utils/requestBodyGenerator')
-const { createAuthorizationHeader } = require('@utils/auth')
 const { cacheSave, cacheGet, getKeys } = require('@utils/redis')
 const { v4: uuidv4 } = require('uuid')
 
@@ -9,14 +8,11 @@ exports.search = async (req, res) => {
 	try {
 		const transactionId = uuidv4()
 		const messageId = uuidv4()
-		const requestBody = requestBodyGenerator('bg_search', { keyword: req.query.keyword }, transactionId, messageId)
-		const authorizationHeader = await createAuthorizationHeader(requestBody)
 		await requester.postRequest(
 			process.env.BECKN_BG_URI + '/search',
-			{
-				authorization: authorizationHeader,
-			},
-			requestBody
+			{},
+			requestBodyGenerator('bg_search', { keyword: req.query.keyword }, transactionId, messageId),
+			{ shouldSign: true }
 		)
 		setTimeout(async () => {
 			const data = await cacheGet(`${transactionId}:${messageId}:ON_SEARCH`)
@@ -36,7 +32,6 @@ exports.onSearch = async (req, res) => {
 		const data = await cacheGet(`${transactionId}:${messageId}:ON_SEARCH`)
 		if (data) {
 			data.push(req.body)
-			console.log(data)
 			await cacheSave(`${transactionId}:${messageId}:ON_SEARCH`, data)
 			await cacheSave('LATEST_ON_SEARCH_RESULT', data)
 		} else {
@@ -57,7 +52,8 @@ exports.init = async (req, res) => {
 		await requester.postRequest(
 			bppUri + '/init',
 			{},
-			requestBodyGenerator('bpp_init', { itemId, fulfillmentId }, transactionId, messageId)
+			requestBodyGenerator('bpp_init', { itemId, fulfillmentId }, transactionId, messageId),
+			{ shouldSign: true }
 		)
 		setTimeout(async () => {
 			const data = await cacheGet(`${transactionId}:${messageId}:ON_INIT`)
@@ -89,7 +85,8 @@ exports.confirm = async (req, res) => {
 		await requester.postRequest(
 			bppUri + '/confirm',
 			{},
-			requestBodyGenerator('bpp_init', { itemId, fulfillmentId }, transactionId, messageId)
+			requestBodyGenerator('bpp_init', { itemId, fulfillmentId }, transactionId, messageId),
+			{ shouldSign: true }
 		)
 		setTimeout(async () => {
 			const data = await cacheGet(`${transactionId}:${messageId}:ON_CONFIRM`)
@@ -148,7 +145,8 @@ exports.cancel = async (req, res) => {
 		await requester.postRequest(
 			bppUri + '/cancel',
 			{},
-			requestBodyGenerator('bpp_cancel', { orderId, cancellation_reason_id }, transactionId, messageId)
+			requestBodyGenerator('bpp_cancel', { orderId, cancellation_reason_id }, transactionId, messageId),
+			{ shouldSign: true }
 		)
 		setTimeout(async () => {
 			const data = await cacheGet(`${transactionId}:${messageId}:ON_CANCEL`)
@@ -182,7 +180,8 @@ exports.status = async (req, res) => {
 		await requester.postRequest(
 			bppUri + '/status',
 			{},
-			requestBodyGenerator('bpp_status', { orderId }, transactionId, messageId)
+			requestBodyGenerator('bpp_status', { orderId }, transactionId, messageId),
+			{ shouldSign: true }
 		)
 		setTimeout(async () => {
 			const data = await cacheGet(`${transactionId}:${messageId}:ON_STATUS`)

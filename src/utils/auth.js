@@ -1,6 +1,7 @@
 'use strict'
 const _sodium = require('libsodium-wrappers')
 const { base64_variants } = require('libsodium-wrappers')
+const { getSubscriberDetails } = require('@utils/lookup')
 
 exports.createAuthorizationHeader = async (message) => {
 	const { signingString, expires, created } = await createSigningString(JSON.stringify(message))
@@ -31,4 +32,56 @@ const signMessage = async (signingString, privateKey) => {
 		sodium.from_base64(privateKey, base64_variants.ORIGINAL)
 	)
 	return sodium.to_base64(signedMessage, base64_variants.ORIGINAL)
+}
+
+exports.verifyHeader = async (header, req) => {
+	try {
+		const parts = splitHeader(header)
+		if (!parts || Object.keys(parts).length === 0) return false
+		const subscriberId = parts['keyId'].split('|')[0]
+		const uniqueKeyId = parts['keyId'].split('|')[1]
+		const subscriberDetails = await getSubscriberDetails(subscriberId, uniqueKeyId)
+		const publicKey = subscriberDetails.signing_public_key
+		const { signingString } = await createSigningString(
+			JSON.stringify(req.body),
+			parts['created'],
+			parts['expires']
+		)
+		return await verifyMessage(parts['signature'], signingString, publicKey)
+	} catch (error) {
+		return false
+	}
+}
+
+const splitHeader = (header) => {
+	header = header.replace('Signature ', '')
+	let re = /\s*([^=]+)=([^,]+)[,]?/g
+	let m
+	let parts = {}
+	while ((m = re.exec(header)) !== null) {
+		if (m) {
+			parts[m[1]] = removeQuotes(m[2])
+		}
+	}
+	return parts
+}
+
+const removeQuotes = (value) => {
+	if (value.length >= 2 && value.charAt(0) == '"' && value.charAt(value.length - 1) == '"')
+		value = value.substring(1, value.length - 1)
+	return value
+}
+
+const verifyMessage = async (signedString, signingString, publicKey) => {
+	try {
+		await _sodium.ready
+		const sodium = _sodium
+		return sodium.crypto_sign_verify_detached(
+			sodium.from_base64(signedString, base64_variants.ORIGINAL),
+			signingString,
+			sodium.from_base64(publicKey, base64_variants.ORIGINAL)
+		)
+	} catch (error) {
+		return false
+	}
 }

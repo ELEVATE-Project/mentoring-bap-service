@@ -30,7 +30,6 @@ exports.registryLookup = async (lookupParameter) => {
 					valid_until: data.valid_until,
 				})
 			} catch (error) {
-				console.log(data)
 				console.log(error)
 			}
 		})
