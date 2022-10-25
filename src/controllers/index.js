@@ -92,37 +92,33 @@ exports.confirm = async (req, res) => {
 			requestBodyGenerator('bpp_init', { itemId, fulfillmentId }, transactionId, messageId),
 			{ shouldSign: true }
 		)
-		setTimeout(async () => {
-			const data = await cacheGet(`${transactionId}:${messageId}:ON_CONFIRM`)
-			if (!data) res.status(403).send({ message: 'No data Found' })
-			else {
-				res.status(200).send({ data: data })
-				const latestOnSearchResult = await cacheGet('LATEST_ON_SEARCH_RESULT')
-				let session
-				if (latestOnSearchResult) {
-					for (let i = 0; i < latestOnSearchResult.length; i++) {
-						const currentBppResponse = latestOnSearchResult[i]
-						if (currentBppResponse.context.bpp_uri === bppUri) {
-							const category = currentBppResponse.message.catalog['bpp/categories'][itemId - 1]
-							const item = currentBppResponse.message.catalog['bpp/providers'][itemId - 1]
-							const fulfillment = currentBppResponse.message.catalog['fulfillments'][itemId - 1]
-							const bpp = currentBppResponse.message.catalog['bpp/descriptor']
-							const provider = currentBppResponse.message.catalog['bpp/providers'][itemId - 1]
-							session = {
-								category,
-								item,
-								fulfillment,
-								bpp,
-								provider,
-							}
-						}
-					}
-				} else {
-					res.status(400).send({ status: false, reason: 'No Latest On Search Result' })
+		const message = await getMessage(`${transactionId}:${messageId}`)
+		if (message !== transactionId + messageId)
+			return res.status(400).json({ message: 'Something Went Wrong (Redis Message Issue)' })
+		const data = await cacheGet(`${transactionId}:${messageId}:ON_CONFIRM`)
+		if (!data) return res.status(403).send({ message: 'No data Found' })
+		res.status(200).send({ data: data })
+		const latestOnSearchResult = await cacheGet('LATEST_ON_SEARCH_RESULT')
+		let session
+		if (!latestOnSearchResult) return res.status(400).send({ status: false, reason: 'No Latest On Search Result' })
+		for (let i = 0; i < latestOnSearchResult.length; i++) {
+			const currentBppResponse = latestOnSearchResult[i]
+			if (currentBppResponse.context.bpp_uri === bppUri) {
+				const category = currentBppResponse.message.catalog['bpp/categories'][itemId - 1]
+				const item = currentBppResponse.message.catalog['bpp/providers'][itemId - 1]
+				const fulfillment = currentBppResponse.message.catalog['fulfillments'][itemId - 1]
+				const bpp = currentBppResponse.message.catalog['bpp/descriptor']
+				const provider = currentBppResponse.message.catalog['bpp/providers'][itemId - 1]
+				session = {
+					category,
+					item,
+					fulfillment,
+					bpp,
+					provider,
 				}
-				await cacheSave(`${bppUri}:${itemId}:ENROLLED`, session)
 			}
-		}, 1000)
+		}
+		await cacheSave(`${bppUri}:${itemId}:ENROLLED`, session)
 	} catch (err) {
 		console.log(err)
 		res.status(400).send({ status: false })
@@ -134,6 +130,7 @@ exports.onConfirm = async (req, res) => {
 		const transactionId = req.body.context.transaction_id
 		const messageId = req.body.context.message_id
 		await cacheSave(`${transactionId}:${messageId}:ON_CONFIRM`, req.body)
+		await sendMessage(`${transactionId}:${messageId}`, transactionId + messageId)
 		res.status(200).json({ status: true, message: 'BAP Received CONFIRM From BPP' })
 	} catch (err) {}
 }
