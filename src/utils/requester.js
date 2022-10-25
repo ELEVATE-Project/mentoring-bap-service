@@ -15,7 +15,8 @@ exports.postRequest = async (url, headers, body, { shouldSign }) => {
 				resolve(res)
 			})
 			.catch((error) => {
-				reject({ status: error.response.status, statusText: error.response.statusText })
+				console.log(error)
+				reject(error)
 			})
 	})
 }

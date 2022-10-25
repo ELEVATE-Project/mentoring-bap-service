@@ -21,3 +21,41 @@ exports.cacheSave = async (key, data) => {
 exports.getKeys = async (pattern) => {
 	return await client.keys(pattern)
 }
+
+const getPubSubClient = async () => {
+	const pubSubClient = client.duplicate()
+	await pubSubClient.connect()
+	return pubSubClient
+}
+
+exports.getMessage = async (channelName) => {
+	const subscriberClient = await getPubSubClient()
+	try {
+		return await new Promise((resolve, reject) => {
+			try {
+				subscriberClient.subscribe(channelName, (message) => {
+					resolve(message)
+				})
+			} catch (err) {
+				reject(err)
+			}
+		})
+	} catch (err) {
+		console.log('REDIS getMessage:', err)
+	} finally {
+		await subscriberClient.unsubscribe(channelName)
+		await subscriberClient.quit()
+	}
+}
+
+exports.sendMessage = async (channelName, message) => {
+	const publisherClient = await getPubSubClient()
+	try {
+		await publisherClient.publish(channelName, message)
+	} catch (err) {
+		console.log('REDIS sendMessage: ', err)
+	} finally {
+		await publisherClient.unsubscribe(channelName)
+		await publisherClient.quit()
+	}
+}
