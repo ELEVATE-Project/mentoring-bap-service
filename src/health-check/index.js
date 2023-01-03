@@ -8,7 +8,7 @@
  let healthCheckService = require('./health-check')
 
  module.exports = function (app) {
-     app.get('/healthCheckStatus', healthCheckService.healthCheckStatus)
-     app.get('/health', healthCheckService.health_check)
+     app.get('/bap-demo/healthCheckStatus', healthCheckService.healthCheckStatus)
+     app.get('/bap-demo/health', healthCheckService.health_check)
  }
  
