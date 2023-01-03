@@ -39,7 +39,7 @@
       shell: cd {{release_path}}/src && npm i && npm i redoc-cli 
 
     - name: Delete Old Folder & create folder
-      shell: rm -rf {{ current_path }} &&  cd {{ project_path }} && mkdir mentoring
+      shell: rm -rf {{ current_path }} &&  cd {{ project_path }} && mkdir bap-deployment
 
     - name: Move code from release  to service folder
       shell: mv "{{ release_path }}"/* {{ current_path }}/
