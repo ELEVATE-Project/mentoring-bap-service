@@ -1,7 +1,7 @@
 'use strict'
 const requester = require('@utils/requester')
 const { requestBodyGenerator } = require('@utils/requestBodyGenerator')
-const { cacheSave, cacheGet, getKeys, getMessage, sendMessage } = require('@utils/redis')
+// const { cacheSave, cacheGet, getKeys, getMessage, sendMessage } = require('@utils/redis')
 const { v4: uuidv4 } = require('uuid')
 
 exports.search = async (req, res) => {

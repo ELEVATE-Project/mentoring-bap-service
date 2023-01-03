@@ -32,6 +32,8 @@
 		"module-alias": "^2.2.2",
 		"mongodb": "^4.1.2",
 		"mongoose": "^6.1.6",
+		"mongoose-autopopulate": "^0.17.0",
+		"mongoose-timestamp": "^0.6.0",
 		"redis": "^4.3.1",
 		"uuid": "^9.0.0"
 	},

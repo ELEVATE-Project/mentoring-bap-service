@@ -1,0 +1,68 @@
+---
+- hosts: elevate
+  vars:
+    #contents: "{{ lookup('file', '/opt/rsync/text.txt') }}"
+    project_path: /opt/backend/deployment
+  tasks:
+    - name: Hashicorp token file
+      slurp:
+        src: "{{ project_path }}/.token"
+      register: slurpfile
+    #- debug: msg="{{ slurpfile['content'] | b64decode }}"
+    #- debug: msg="the value of foo.txt is {{ contents }}"
+    - name: Run vault credentials
+      shell: "curl --location --request GET '{{ vaultAddress }}v1/elevate/data/bap' --header 'X-Vault-Token: {{ slurpfile['content'] | b64decode }}' | jq '.data' > '{{ project_path 
+}}/bap.json'"
+      register: credentials
+
+    - name: Create release folder
+      set_fact:
+        release_path: "{{ project_path }}/releases/{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
+        current_path: "{{ project_path }}/bap"
+    
+    - name: Create new folder
+      file:
+        dest={{ release_path }}
+        mode=0755
+        recurse=yes
+        state=directory
+
+    - name: Clone the repository
+      git:
+        repo: https://github.com/ELEVATE-Project/mentoring-bap-service.git
+        dest: "{{ release_path }}"
+        clone: yes
+        update: yes
+        version: "{{ gitBranch }}"
+
+    - name: Update npm
+      shell: cd {{release_path}}/src && npm i && npm i redoc-cli 
+
+    - name: Delete Old Folder & create folder
+      shell: rm -rf {{ current_path }} &&  cd {{ project_path }} && mkdir mentoring
+
+    - name: Move code from release  to service folder
+      shell: mv "{{ release_path }}"/* {{ current_path }}/
+
+    - name: Delete old pm2 process
+      command: pm2 delete bap-deployment
+      ignore_errors: yes
+    
+    - name: set permission
+      shell: chmod 744 {{ current_path }}/src/scripts/json2env.sh  
+      
+    - name: generate .env 
+      shell: cat {{ project_path }}/bap.json | {{ current_path }}/src/scripts/json2env.sh > {{ current_path }}/src/.env
+      register: envConfig 
+    - debug: msg=" cred {{ envConfig }} "
+
+    - name: Delete release folder
+      shell: rm -rf  {{ release_path }}
+
+    - name: Start pm2
+      command: "chdir={{current_path}}/src pm2 start app.js -i 2 --name bap-deployment"
+      register: pm2Info
+
+    - name: debug info
+      debug:
+         msg: "Pm2 log {{pm2Info}}"

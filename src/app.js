@@ -2,15 +2,20 @@
 require('module-alias/register')
 require('dotenv').config()
 
+require("./config/mongo")();
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
 
+require('./health-check')(app)
+
 app.use(bodyParser.urlencoded({ extended: true, limit: '50MB' }))
 app.use(bodyParser.json({ limit: '50MB' }))
 app.use(cors())
 app.use('/bap', require('@routes'))
+
 
 app.listen(process.env.APPLICATION_PORT, (res, err) => {
 	if (err) onError(err)
