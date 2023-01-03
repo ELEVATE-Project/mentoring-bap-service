@@ -18,7 +18,7 @@
     - name: Create release folder
       set_fact:
         release_path: "{{ project_path }}/releases/{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
-        current_path: "{{ project_path }}/bap"
+        current_path: "{{ project_path }}/bap-deployment"
     
     - name: Create new folder
       file:
