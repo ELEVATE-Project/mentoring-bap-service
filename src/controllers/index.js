@@ -243,3 +243,15 @@ exports.enrolledSessions = async (req, res) => {
 		console
 	}
 }
+
+exports.onUpdate = async (req, res) => {
+	try {
+		const transactionId = req.body.context.transaction_id
+		const messageId = req.body.context.message_id
+		await cacheSave(`${transactionId}:${messageId}:ON_UPDATE`, req.body)
+		await sendMessage(`${transactionId}:${messageId}`, transactionId + messageId)
+		res.status(200).json({ status: true, message: 'BAP Received On Update From BPP' })
+	} catch (err) {
+		console.log(err)
+	}
+}
