@@ -8,13 +8,13 @@
 
     Docker-compose: https://docs.docker.com/compose/
 
-2.  Expose localhost post 3015 with Ngrok
+2.  Expose localhost port 3015 with Ngrok
 
     ```
     $ngrok http 3015
     ```
 
-    While keeping the ngrok port forwarding active, keep a note of "forwarding" address from the terminal.
+    While keeping the ngrok port forwarding active, keep a note of the "forwarding" address from the terminal.
 
 3.  In the src folder of this project, create a new .env file and paste the following content:
 
