@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mongo:
+    image: 'mongo:4.4.14'
+    container_name: c4gt-mentoring-mongo
+    restart: 'always'
+    ports:
+      - '27017:27017'
+    networks:
+      - c4gt_mentoring_net
+    volumes:
+      - mongo-data:/data/db
+    logging:
+      driver: none
+  redis:
+    image: 'redis:7.0.0'
+    container_name: c4gt-mentoring-redis
+    restart: 'always'
+    expose:
+      - '6379'
+    networks:
+      - c4gt_mentoring_net
+    logging:
+      driver: none
+  mentoring-bap:
+    build: './'
+    container_name: c4gt-mentoring-bap
+    image: c4gt/mentoring-bap:1.0
+    volumes:
+      - ./src/:/var/src
+    ports:
+      - '3015:3015'
+    command: [ 'nodemon', 'app.js' ]
+    depends_on:
+      - redis
+    networks:
+      - c4gt_mentoring_net
+networks:
+  c4gt_mentoring_net:
+    external: false
+volumes:
+  mongo-data:
