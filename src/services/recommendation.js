@@ -1,4 +1,4 @@
-'use strict'
+/* 'use strict'
 const { internalRequests } = require('@helpers/requests')
 const { itemQueries } = require('@database/storage/item/queries')
 const { itemListTransformer } = require('@helpers/itemListTransformer')
@@ -77,3 +77,4 @@ exports.recommendationService = {
 	getItemPageRecommendations,
 	getProfilePageRecommendations,
 }
+ */

@@ -6,6 +6,6 @@ exports.externalRequests = {
 }
 
 exports.internalRequests = {
-	recommendationPOST: internalPOSTRequest(process.env.RECOMMENDATION_URI),
-	recommendationGET: internalGETRequest(process.env.RECOMMENDATION_URI),
+	/* recommendationPOST: internalPOSTRequest(process.env.RECOMMENDATION_URI),
+	recommendationGET: internalGETRequest(process.env.RECOMMENDATION_URI), */
 }

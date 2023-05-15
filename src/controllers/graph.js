@@ -1,4 +1,4 @@
-'use strict'
+/* 'use strict'
 const { internalRequests } = require('@helpers/requests')
 const { responses } = require('@helpers/responses')
 
@@ -88,3 +88,4 @@ const graphController = {
 }
 
 module.exports = graphController
+ */

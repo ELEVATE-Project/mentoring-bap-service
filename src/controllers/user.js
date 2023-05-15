@@ -59,13 +59,13 @@ const addProfile = async (req, res) => {
 	const failedRes = () => responses.failBad(res, 'Profile Creation Failed')
 	try {
 		const userId = req.user.id
-		const user = await userQueries.findById(userId)
-		const email = user.email
+		//const user = await userQueries.findById(userId)
+		//const email = user.email
 		const name = req.body.name
 		const phone = req.body.phone
 		const newProfile = await profileQueries.updateOrCreateOne(userId, { name, phone })
 		if (!newProfile) return failedRes()
-		const response = await internalRequests.recommendationPOST({
+		/* const response = await internalRequests.recommendationPOST({
 			route: process.env.RECOMMENDATION_ADD_USER,
 			body: {
 				userId,
@@ -74,7 +74,7 @@ const addProfile = async (req, res) => {
 				name,
 			},
 		})
-		if (!response.status) return failedRes()
+		if (!response.status) return failedRes() */
 		responses.successCreated(res, 'Profile Created Successfully', newProfile)
 	} catch (err) {
 		console.log(err)
@@ -97,7 +97,7 @@ const editProfile = async (req, res) => {
 	}
 }
 
-const getUserEmails = async (req, res) => {
+/* const getUserEmails = async (req, res) => {
 	try {
 		const response = await internalRequests.recommendationPOST({
 			route: process.env.RECOMMENDATION_GET_USER_EMAILS,
@@ -107,14 +107,14 @@ const getUserEmails = async (req, res) => {
 		console.log(err)
 		responses.failBad(res, 'Something Went Wrong')
 	}
-}
+} */
 
 const userController = {
 	login,
 	signup,
 	addProfile,
 	editProfile,
-	getUserEmails,
+	/* getUserEmails, */
 }
 
 module.exports = userController

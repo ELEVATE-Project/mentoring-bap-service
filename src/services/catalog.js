@@ -92,17 +92,17 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 					delete session.fulfillment.customer
 				}
 				await cacheSave(`SESSION:${itemId}`, session)
-				const response = await internalRequests.recommendationPOST({
+				/* const response = await internalRequests.recommendationPOST({
 					route: process.env.RECOMMENDATION_ADD_ITEM,
 					body: {
 						payload: session,
 					},
-				})
+				}) */
 				const { storedItem } = await itemQueries.findOrCreate({
 					where: { itemId },
 					defaults: { details: JSON.stringify(session), bppMongoId },
 				})
-				if (!response.status) throw 'Neo4j Item Injection Failed'
+				/* if (!response.status) throw 'Neo4j Item Injection Failed' */
 				await cacheSave(`SESSION:BPP_ID:${itemId}`, bppMongoId)
 				const sessionsList = await cacheGet(`SESSION_LIST:${transactionId}`)
 				if (!sessionsList) await cacheSave(`SESSION_LIST:${transactionId}`, [itemId])

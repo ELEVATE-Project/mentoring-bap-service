@@ -1,4 +1,4 @@
-'use strict'
+/* 'use strict'
 const router = require('express').Router()
 const graphController = require('@controllers/graph')
 
@@ -10,3 +10,4 @@ router.get('/trigger-auto-search', graphController.triggerAutoSearch)
 router.get('/delete-all-nodes', graphController.deleteAllNodes)
 
 module.exports = router
+ */
