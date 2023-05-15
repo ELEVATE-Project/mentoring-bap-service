@@ -79,7 +79,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDU3NmQ3Yjc1OGEzOGNkMWUwYjY3YzciLCJpYXQiOjE2ODM0NTEyNTksImV4cCI6MTY4MzUzNzY1OX0.ikibNE0iIX7Vn0bT3PE-c-tk-M3Ny0V4ip0CmidpcJTBox374QFqNVHh-cHtj8ZPYbE2CoTp0kzgJaaVXYCubUAfgAklPTKS1SdipCuu5bAZt14IQyVaCYatMxN_BK6Ak5TX33yj8BqMy6YMfmDV-ZvxAyB_UXnTcM5QSy2CEfD_uD8AmXLb2dnafihRna_OHOaIB_a99HNxjcnQL3ULoWrXXr_M6RV9bkBtVE9hJBSQ_0sBlL6hXXH4al3fTrhRHO3x_c4jocv4vwB2rNHMVehJQz0RNwUsM3RaRWnaE7hYdxD_LJQFaNRwT9-AepX0t-M2IwJMwctiAdS01KBjMQ",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDYxYWYyN2IxNGU4OTliYTYyYjUwYzgiLCJpYXQiOjE2ODQxMjM0MzEsImV4cCI6MTY4NDIwOTgzMX0.1xh73tQKWv-lTpwpiSg97EVrntksRTpJYyf5ZDFb3UArlHTxuKWofHvzXskUUtwI6xg_UWjJkMmWean68rzBJlZQYWCjfuclpBoVKOV_itFyTeZ6r6vKkIla4KMAM06J6U8opsT-qm-8qV0ZN_XG416McfPNnVKSjY2HaQPZ8cywXywkDg6eSk8RGxldG4HpwqUXdIDiPLlCKl0H7Z3eAAoBLexTcZk0RVg1s1x4R3vjB_VqlHogWup2nLR8ISV7akUEgM60Tuo9t5DghD8V51K1pFDzdD9pDcN5t0sX22jpHwVC-4RXD2JSkQYEkMW2Uic3MvNI0Gc-46wkyF1w6w",
 										"type": "text"
 									}
 								],
@@ -337,7 +337,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"itemId\":\"63f9ed2d23df082856938022\"\n}",
+											"raw": "{\n    \"itemId\":\"643d59f6a8cc31fe6f25bc39\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -372,13 +372,13 @@
 										"header": [
 											{
 												"key": "Authorization",
-												"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDBjMWYyZWNkMjQzMmFkYzI1MjI3ZmEiLCJpYXQiOjE2Nzg1MTYwNTQsImV4cCI6MTY3ODYwMjQ1NH0.r1bOgYN-y47yKfd_yZBXC7Y82kXkEbz6ZTaqkm-mpUseM0GJphLFxfjd2vzb-Zftetbqn2To0VAcDsLMdKx09BoOUImjrP0ruoJluVKAk1hMPzOAzL7Iyst5gCXiLy0hMcCBdjQDm2H550Yr0gikwA67W56C9NBo0pvTDRboijqosjbZz1vqPB_6WCRAuKfOaMag2FwgvlBGIkVluuVcDLs9p9aTOBcnIYrlGI-wEY2oEE1neTFQZWKIS3isDb2vOlgffwgkycjeEjtfz3w8xJymiEpHFmGR92J8013F5HpHkMCBLqPJTeAmJ71VXpj_X9q_Fg1uYzqNZzxdbHVfJw",
+												"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDYxYWYyN2IxNGU4OTliYTYyYjUwYzgiLCJpYXQiOjE2ODQxMjM0MzEsImV4cCI6MTY4NDIwOTgzMX0.1xh73tQKWv-lTpwpiSg97EVrntksRTpJYyf5ZDFb3UArlHTxuKWofHvzXskUUtwI6xg_UWjJkMmWean68rzBJlZQYWCjfuclpBoVKOV_itFyTeZ6r6vKkIla4KMAM06J6U8opsT-qm-8qV0ZN_XG416McfPNnVKSjY2HaQPZ8cywXywkDg6eSk8RGxldG4HpwqUXdIDiPLlCKl0H7Z3eAAoBLexTcZk0RVg1s1x4R3vjB_VqlHogWup2nLR8ISV7akUEgM60Tuo9t5DghD8V51K1pFDzdD9pDcN5t0sX22jpHwVC-4RXD2JSkQYEkMW2Uic3MvNI0Gc-46wkyF1w6w",
 												"type": "text"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"itemId\":\"63f9edac23df0828569383d3\",\n    \"fulfillmentId\":\"b381aa0c-ce48-43e8-ad99-652f502c2af4\"\n}",
+											"raw": "{\n    \"itemId\":\"643d59f6a8cc31fe6f25bc39\",\n    \"fulfillmentId\":\"b381aa0c-ce48-43e8-ad99-652f502c2af4\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -449,13 +449,13 @@
 										"header": [
 											{
 												"key": "Authorization",
-												"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDBjMWYyZWNkMjQzMmFkYzI1MjI3ZmEiLCJpYXQiOjE2Nzg1MTYwNTQsImV4cCI6MTY3ODYwMjQ1NH0.r1bOgYN-y47yKfd_yZBXC7Y82kXkEbz6ZTaqkm-mpUseM0GJphLFxfjd2vzb-Zftetbqn2To0VAcDsLMdKx09BoOUImjrP0ruoJluVKAk1hMPzOAzL7Iyst5gCXiLy0hMcCBdjQDm2H550Yr0gikwA67W56C9NBo0pvTDRboijqosjbZz1vqPB_6WCRAuKfOaMag2FwgvlBGIkVluuVcDLs9p9aTOBcnIYrlGI-wEY2oEE1neTFQZWKIS3isDb2vOlgffwgkycjeEjtfz3w8xJymiEpHFmGR92J8013F5HpHkMCBLqPJTeAmJ71VXpj_X9q_Fg1uYzqNZzxdbHVfJw",
+												"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDYxYWYyN2IxNGU4OTliYTYyYjUwYzgiLCJpYXQiOjE2ODQxMjM0MzEsImV4cCI6MTY4NDIwOTgzMX0.1xh73tQKWv-lTpwpiSg97EVrntksRTpJYyf5ZDFb3UArlHTxuKWofHvzXskUUtwI6xg_UWjJkMmWean68rzBJlZQYWCjfuclpBoVKOV_itFyTeZ6r6vKkIla4KMAM06J6U8opsT-qm-8qV0ZN_XG416McfPNnVKSjY2HaQPZ8cywXywkDg6eSk8RGxldG4HpwqUXdIDiPLlCKl0H7Z3eAAoBLexTcZk0RVg1s1x4R3vjB_VqlHogWup2nLR8ISV7akUEgM60Tuo9t5DghD8V51K1pFDzdD9pDcN5t0sX22jpHwVC-4RXD2JSkQYEkMW2Uic3MvNI0Gc-46wkyF1w6w",
 												"type": "text"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"itemId\":\"63f9ed2c23df08285693801d\",\n    \"fulfillmentId\":\"27a9ca55-877b-4601-a009-b83262b81639\",\n    \"type\":\"session\"\n}",
+											"raw": "{\n    \"itemId\":\"643d59f6a8cc31fe6f25bc39\",\n    \"fulfillmentId\":\"2fdbe3d5-8488-49c9-aa8f-9ab05425c245\",\n    \"type\":\"session\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -483,293 +483,8 @@
 					]
 				},
 				{
-					"name": "Graph",
-					"item": [
-						{
-							"name": "Recompute Recommendations",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3015/osl-bap/graph/recompute-collaborative-recommendations",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3015",
-									"path": [
-										"osl-bap",
-										"graph",
-										"recompute-collaborative-recommendations"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Recompute Content Recommendations",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3015/osl-bap/graph/recompute-content-recommendations",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3015",
-									"path": [
-										"osl-bap",
-										"graph",
-										"recompute-content-recommendations"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Recompute PageRank",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3015/osl-bap/graph/recompute-pagerank",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3015",
-									"path": [
-										"osl-bap",
-										"graph",
-										"recompute-pagerank"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Trigger AutoSearch",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3015/osl-bap/graph/trigger-auto-search?command=start",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3015",
-									"path": [
-										"osl-bap",
-										"graph",
-										"trigger-auto-search"
-									],
-									"query": [
-										{
-											"key": "command",
-											"value": "start"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete All Nodes",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3015/osl-bap/graph/delete-all-nodes",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3015",
-									"path": [
-										"osl-bap",
-										"graph",
-										"delete-all-nodes"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Set Unique Constraints",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:3015/osl-bap/set-unique-constraints",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3015",
-									"path": [
-										"osl-bap",
-										"set-unique-constraints"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "Consumer",
 					"item": [
-						{
-							"name": "Recommendations",
-							"item": [
-								{
-									"name": "Get Recommendations (Sessions)",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDRmYzY5MzU3OTE5N2FjNWQyNmZiYjgiLCJpYXQiOjE2ODI5NTAyMTYsImV4cCI6MTY4MzAzNjYxNn0.aE4ZfwFZ60FfliZvr64fxgyF91GEc5I0tKmetOZaQcULs8q0Cl0dV441CBHzIGHMh0B2IIdirpMiDp-PW8mPb6YLK3RbJK-gkecHs-nmGkYcm-5lHWzgNGz_XihSh8t4vkPS30-BRLJVJNgvMcdmer2zTRqZcAhNWVL83x2HeAPEf_-ksK-KWUhN-edRC_JAIacUSTGHom9cMoYCZib6N4ldCrSF4mvZCtoQUsA8YkYSuljBx234LztI3Hxt3B1k5JuKEkY5r5mTNPi5VgQBJ9uNrzhmqJ8y7O7LXTAyYKI2bp9e6qoVSR5H4R2mlr8YKJEhcyYBHOBx7ZxyiZ85Xg",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"type\":\"session\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "http://localhost:3015/osl-bap/consumer/get-recommendations",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "3015",
-											"path": [
-												"osl-bap",
-												"consumer",
-												"get-recommendations"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Get Profile Page Recommendations",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDNkMzFkYTRlN2ZlOTlmNjg4MGYyMmEiLCJpYXQiOjE2ODE3MzM3MDksImV4cCI6MTY4MTgyMDEwOX0.QdRriP9jm4eZNAE3qnYJpxf9z5B7W0w5U7W5208LMxUwXLj0c_TYP4IWOw1AbwqH14MOx1byrk8E3QZbRF8M1RhdLoTtOmhUPJ5aDHejPvgk1BeqVKo44EcUXl48FPlMZgwNnPKmDpVk_kGiM2U1Zqfp7lXd2JBC9s9ybo0FrnLFBLMLB4UHMKTI6IUOw16TU3WqQi4Lzd-OxdIJ98qH9TxWGjutQmm6MupLb9Bq9QfNxSXb4QnqBaPP7PLDNsexzOyLjbhpOvxiDxOJv3S_9odNH2qC904l4CmGLutdbReZ71yZAtGTPmp1sGExwwLYHkrEw0Hz3LcgS5j5RolXpg",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"type\":\"session\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "http://localhost:3015/osl-bap/consumer/get-profile-page-recommendations",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "3015",
-											"path": [
-												"osl-bap",
-												"consumer",
-												"get-profile-page-recommendations"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Get Item Page Recommendations",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDM0Mzc2M2M0NzY1ZDQ4NzY1MGUyNTgiLCJpYXQiOjE2ODExNDQxODIsImV4cCI6MTY4MTIzMDU4Mn0.8sB6u4DaZUCBl5VrhrW6Y8LWEgdzKxh2M28bqc_P3G1j_3-SZWbA315nOKNy2AAD6jSr0z7lnkzg046AXEAGW3ovGHzO82eL4NQB73NEGdqEvnERJ_ONN5tJjuNvFum_9W5U96NP2ICSI8TqD2quuDnPVyGC-aGECaDlXkXIsXrYWEvHQUSWJbD1A1_8-Nnr5Dy0wYBPeS8-klfXu9zQSD3LwdhDMLRU1JCTun77j4KuI5BxwOpPaMq3MgW_L43HD88qMWjHxzou231vLj29E_eVFvBFsdq3M9It5ZwPsI0ekfwlyNPJrItBp2fuEvbs_msTP7ShTQlUwP7aSuA8cQ",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"itemId\": \"643d2ee8a8cc31fe6f259956\",\n    \"type\": \"session\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "http://localhost:3015/osl-bap/consumer/get-item-page-recommendations",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "3015",
-											"path": [
-												"osl-bap",
-												"consumer",
-												"get-item-page-recommendations"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Get Recommendations (Mentors)",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDM0MWJmNzAxMWUwZDdlMTA3ODc2Y2MiLCJpYXQiOjE2ODExMzczNTUsImV4cCI6MTY4MTIyMzc1NX0.tb3nbUGxNDh6mgj2LqF7V49pkTBPB5GLkIb-SzbgKKZAcqxGQgtCcQ_OvQFZKuFoNluuFRAV013x8Su-IXXVwJLvhEWD5oSpSASShavKhE3mhR2DLb4Oz8OWPbt82CusELFd7xXZn9Dp8isGYGCWOgAkHP5oGdCxA84EZV8mxipl-Z_Gxf1k5gpHeu4fyFHEhPnlMFB0iUuOlh3b9fEl02AtIKYV4avOQN9ePgQNxIjy_sONT7HuBuTnKRF7KRfhDD_G3MC2kUyk3yyoWcBxMezHuzh-Z8mqzvx86iCIycbASFEZBmlpr-SJxh-88zlFtb2ZqxFdtZbhKVlx46Lkjw",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"type\":\"mentor\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "http://localhost:3015/osl-bap/consumer/get-recommendations",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "3015",
-											"path": [
-												"osl-bap",
-												"consumer",
-												"get-recommendations"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
 						{
 							"name": "Get Confirmed List",
 							"request": {
@@ -777,7 +492,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDNkMzFkYTRlN2ZlOTlmNjg4MGYyMmEiLCJpYXQiOjE2ODE3MzM3MDksImV4cCI6MTY4MTgyMDEwOX0.QdRriP9jm4eZNAE3qnYJpxf9z5B7W0w5U7W5208LMxUwXLj0c_TYP4IWOw1AbwqH14MOx1byrk8E3QZbRF8M1RhdLoTtOmhUPJ5aDHejPvgk1BeqVKo44EcUXl48FPlMZgwNnPKmDpVk_kGiM2U1Zqfp7lXd2JBC9s9ybo0FrnLFBLMLB4UHMKTI6IUOw16TU3WqQi4Lzd-OxdIJ98qH9TxWGjutQmm6MupLb9Bq9QfNxSXb4QnqBaPP7PLDNsexzOyLjbhpOvxiDxOJv3S_9odNH2qC904l4CmGLutdbReZ71yZAtGTPmp1sGExwwLYHkrEw0Hz3LcgS5j5RolXpg",
+										"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDYxYWYyN2IxNGU4OTliYTYyYjUwYzgiLCJpYXQiOjE2ODQxMjM0MzEsImV4cCI6MTY4NDIwOTgzMX0.1xh73tQKWv-lTpwpiSg97EVrntksRTpJYyf5ZDFb3UArlHTxuKWofHvzXskUUtwI6xg_UWjJkMmWean68rzBJlZQYWCjfuclpBoVKOV_itFyTeZ6r6vKkIla4KMAM06J6U8opsT-qm-8qV0ZN_XG416McfPNnVKSjY2HaQPZ8cywXywkDg6eSk8RGxldG4HpwqUXdIDiPLlCKl0H7Z3eAAoBLexTcZk0RVg1s1x4R3vjB_VqlHogWup2nLR8ISV7akUEgM60Tuo9t5DghD8V51K1pFDzdD9pDcN5t0sX22jpHwVC-4RXD2JSkQYEkMW2Uic3MvNI0Gc-46wkyF1w6w",
 										"type": "text"
 									}
 								],
@@ -804,13 +519,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDBjMWYyZWNkMjQzMmFkYzI1MjI3ZmEiLCJpYXQiOjE2Nzg1MTYwNTQsImV4cCI6MTY3ODYwMjQ1NH0.r1bOgYN-y47yKfd_yZBXC7Y82kXkEbz6ZTaqkm-mpUseM0GJphLFxfjd2vzb-Zftetbqn2To0VAcDsLMdKx09BoOUImjrP0ruoJluVKAk1hMPzOAzL7Iyst5gCXiLy0hMcCBdjQDm2H550Yr0gikwA67W56C9NBo0pvTDRboijqosjbZz1vqPB_6WCRAuKfOaMag2FwgvlBGIkVluuVcDLs9p9aTOBcnIYrlGI-wEY2oEE1neTFQZWKIS3isDb2vOlgffwgkycjeEjtfz3w8xJymiEpHFmGR92J8013F5HpHkMCBLqPJTeAmJ71VXpj_X9q_Fg1uYzqNZzxdbHVfJw",
+										"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDYxYWYyN2IxNGU4OTliYTYyYjUwYzgiLCJpYXQiOjE2ODQxMjM0MzEsImV4cCI6MTY4NDIwOTgzMX0.1xh73tQKWv-lTpwpiSg97EVrntksRTpJYyf5ZDFb3UArlHTxuKWofHvzXskUUtwI6xg_UWjJkMmWean68rzBJlZQYWCjfuclpBoVKOV_itFyTeZ6r6vKkIla4KMAM06J6U8opsT-qm-8qV0ZN_XG416McfPNnVKSjY2HaQPZ8cywXywkDg6eSk8RGxldG4HpwqUXdIDiPLlCKl0H7Z3eAAoBLexTcZk0RVg1s1x4R3vjB_VqlHogWup2nLR8ISV7akUEgM60Tuo9t5DghD8V51K1pFDzdD9pDcN5t0sX22jpHwVC-4RXD2JSkQYEkMW2Uic3MvNI0Gc-46wkyF1w6w",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"orderId\":\"28475ae8-3cf8-46ea-a10a-12240ccf48f3\",\n    \"rating\":\"5\"\n}",
+									"raw": "{\n    \"orderId\":\"6805b0a0-daf2-4995-b2b7-a640556db634\",\n    \"rating\":\"5\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
