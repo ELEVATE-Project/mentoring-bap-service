@@ -1,23 +1,25 @@
-'use strict'
-const { DataTypes } = require('sequelize')
-const postgresdb = require('@configs/postgres')
-
-const User = postgresdb.define('User', {
-	email: {
-		type: DataTypes.STRING,
-		unique: true,
-		allowNull: false
-	},
-	hash: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-	salt: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-}, {
-	timestamps: false
-})
-
-module.exports = User
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  User.init({
+    email: DataTypes.STRING,
+    hash: DataTypes.STRING,
+    salt: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};
