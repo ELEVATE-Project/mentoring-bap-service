@@ -8,14 +8,59 @@ const crypto = require('crypto')
 
 const generateMentorNames = () => {
 	try {
-		const count = 42
+		/* const count = 42
 		const mentorSet = new Set()
 		let i = 0
 		do {
 			i++
 			mentorSet.add(faker.name.fullName())
 		} while (mentorSet.size !== count)
-		return Array.from(mentorSet)
+		return Array.from(mentorSet) */
+		return [
+			'Aarav Sharma',
+			'Aanya Patel',
+			'Advait Kumar',
+			'Amaya Joshi',
+			'Arjun Gupta',
+			'Arya Singh',
+			'Ayush Desai',
+			'Chahat Mehta',
+			'Dhruv Kapoor',
+			'Eesha Shah',
+			'Ishaan Patel',
+			'Ishika Verma',
+			'Kabir Agarwal',
+			'Kavya Patel',
+			'Madhav Reddy',
+			'Maanvi Kumar',
+			'Manan Sharma',
+			'Navya Desai',
+			'Nikhil Patel',
+			'Prisha Yadav',
+			'Rahul Bansal',
+			'Riya Singh',
+			'Rudra Shah',
+			'Saachi Chopra',
+			'Samar Verma',
+			'Sanskriti Patel',
+			'Shreya Goyal',
+			'Shivansh Kumar',
+			'Siya Gupta',
+			'Sneha Rajan',
+			'Sparsh Patel',
+			'Tanisha Bhatia',
+			'Utkarsh Sharma',
+			'Vaishnavi Reddy',
+			'Vansh Mehta',
+			'Vedant Kapoor',
+			'Vidhi Patel',
+			'Vivaan Singh',
+			'Yashvi Chauhan',
+			'Yuvaan Kumar',
+			'Zara Agarwal',
+			'Pooja Singh',
+			'Adarsh Sharma',
+		]
 	} catch (err) {
 		console.log(err)
 	}
@@ -140,7 +185,7 @@ const generateBPPData = async () => {
 
 		let category
 		let organisation
-		for (let i = 0; i < 200; i++) {
+		for (let i = 0; i < 400; i++) {
 			console.log('i: ', i)
 			if (i % 20 === 0) {
 				++organizationNameIndex
@@ -176,8 +221,8 @@ const generateBPPData = async () => {
 			if (i % 20 === 0) ++clusterNumber
 
 			await generateSession(access_token, {
-				title: `${sessionTitles[i]} ClusterNumber${clusterNumber}`,
-				description: `${sessionTitles[i]} ClusterNumber${clusterNumber}`,
+				title: `${sessionTitles[i]}`,
+				description: `${sessionTitles[i]}`,
 				startDate: timeSlots[timeSlotIndex].startDate,
 				endDate: timeSlots[timeSlotIndex].endDate,
 				recommendedFor: [
