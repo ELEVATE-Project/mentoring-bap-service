@@ -1,34 +1,37 @@
 'use strict'
-const Item = require('../models-psql/item')
 const { isEmpty } = require('@utils/generic')
+const db = require("../models-psql/index")
+const Item = db.Item;
 
 const create = async (data) => {
 	try {
 		return await Item.create(data)
 	} catch (err) {
-		console.error(err)
-		throw err
+		console.log(err)
 	}
 }
 
 const findOrCreate = async ({ where = {}, defaults = {} }) => {
 	try {
-		if (isEmpty(where)) throw new Error('Where Clause Is Empty')
-		const [item, created] = await Item.findOrCreate({ where, defaults })
-		if (created) console.log('New Item Entry Created')
-		else console.log('Found Existing Item')
-		return { item, created }
+		if (isEmpty(where)) throw 'Where Clause Is Empty'
+		defaults = Object.assign(where, defaults)
+
+		const [item, created] = await Item.findOrCreate({ where: where, defaults: defaults })
+		if (created) console.log('New BPP Entry Created')
+		else console.log('Found Existing BPP')
+
+		return { item, isNew: created }
 	} catch (err) {
-		console.error('Item.findOrCreate: ', err)
+		console.log('BPP.findOrCreate: ', err)
 		throw err
 	}
 }
 
 const findById = async (id) => {
 	try {
-		return await Item.findByPk(id)
+		return await Item.findByPk(id)  // findByPk is the Sequelize method for finding by primary key
 	} catch (err) {
-		console.error(err)
+		console.log(err)
 		throw err
 	}
 }
@@ -37,7 +40,7 @@ const findByItemId = async (itemId) => {
 	try {
 		return await Item.findOne({ where: { itemId } })
 	} catch (err) {
-		console.error(err)
+		console.log(err)
 		throw err
 	}
 }

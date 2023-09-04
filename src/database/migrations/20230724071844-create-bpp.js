@@ -2,30 +2,33 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Bpps', {
+    await queryInterface.createTable('bpps', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      bppId: {
+      bpp_id: {
         type: Sequelize.STRING
       },
-      bppUri: {
+      bpp_uri: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      deleted_at: {
+				type: Sequelize.DATE,
+			},
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Bpps');
+    await queryInterface.dropTable('bpps');
   }
 };

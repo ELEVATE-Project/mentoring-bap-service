@@ -5,7 +5,7 @@ const { searchMentorMessageDTO } = require('@dtos/searchMentorMessage')
 const { searchSessionMessageDTO } = require('@dtos/searchSessionMessage')
 const { requestBodyDTO } = require('@dtos/requestBody')
 const { externalRequests } = require('@helpers/requests')
-const { bppQueries } = require('@database/storage/bpp/queries')
+const { bppQueries } = require('@database/queries-psql/bpp')
 const { catalogService } = require('@services/catalog')
 const { searchItemListGenerator } = require('@helpers/searchItemListGenerator')
 

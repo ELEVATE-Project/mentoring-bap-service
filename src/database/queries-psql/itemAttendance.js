@@ -1,6 +1,7 @@
 'use strict'
-const ItemAttendance = require('../models-psql/itemAttendance')
 const { isEmpty } = require('@utils/generic')
+const db = require("../models-psql/index")
+const ItemAttendance = db.itemAttendance;
 
 const create = async (data) => {
 	try {

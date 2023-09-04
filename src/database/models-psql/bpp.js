@@ -1,24 +1,37 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Bpp extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      // Define associations here (if needed)
     }
   }
-  Bpp.init({
-    bppId: DataTypes.STRING,
-    bppUri: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Bpp',
-  });
+
+  Bpp.init(
+    {
+      id: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				primaryKey: true,
+				autoIncrement: true,
+			},
+      bppId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        primaryKey: true,
+      },
+      bppUri: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Bpp',
+      tableName: 'bpps',
+    }
+  );
+
   return Bpp;
 };

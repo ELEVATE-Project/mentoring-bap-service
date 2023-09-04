@@ -1,5 +1,6 @@
 'use strict'
-const Profile = require('../models-psql/profile')
+const db = require("../models-psql/index")
+const Profile = db.profile;
 
 const create = async (userId, name, phone) => {
 	try {

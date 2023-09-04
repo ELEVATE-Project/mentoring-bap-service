@@ -1,5 +1,6 @@
 'use strict'
-const User = require('../models-psql/user')
+const db = require("../models-psql/index")
+const User = db.user;
 
 const create = async (email, hash, salt) => {
 	try {
