@@ -49,7 +49,11 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 				name: provider.descriptor.name,
 			}
 			for (const item of provider.items) {
-				indexDocument('item-raw-index', item.id, item)
+				/* indexDocument('item-raw-index', item.id, item) */
+				await internalRequests.catalogPOST({
+					route: process.env.BAP_CATALOG_INDEX_RAW_SESSION_ROUTE,
+					body: { session: item, sessionId: item.id },
+				})
 				const itemId = item.id
 				const categoryIds = item.category_ids.map((categoryId) => {
 					return categoryId.replace(/ /g, '-').toLowerCase()
@@ -107,10 +111,15 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 				// 	body: session,
 				// 	id: itemId
 				//   })
-				console.log('BEFORE INDEXING')
+				/* console.log('BEFORE INDEXING')
 				console.log('ITEM ID: ', itemId, 'SESSION: ', session)
 				await indexDocument('item-index', itemId, session)
-				console.log('AFTER INDEXING')
+				console.log('AFTER INDEXING') */
+				console.log({ session, itemId })
+				await internalRequests.catalogPOST({
+					route: process.env.BAP_CATALOG_INDEX_SESSION_ROUTE,
+					body: { session, sessionId: itemId },
+				})
 				const { storedItem } = await itemQueries.findOrCreate({
 					where: { itemId },
 					defaults: { details: JSON.stringify(session), bppMongoId },
