@@ -1,13 +1,16 @@
 'use strict'
 const { cacheGet } = require('@utils/redis')
 const rfdc = require('rfdc')()
+const { getDocumentById } = require('@utils/elasticsearch')
 
 exports.searchItemListGenerator = async (transactionId, type) => {
 	try {
 		const itemList = await cacheGet(`SESSION_LIST:${transactionId}`)
+		// Instead of reading from redis use elasticsearch
 		const items = await Promise.all(
 			itemList.map(async (itemId) => {
-				return await cacheGet(`SESSION:${itemId}`)
+				// return await cacheGet(`SESSION:${itemId}`)
+				return await getDocumentById('item-index', itemId)
 			})
 		)
 		if (type === 'session') {

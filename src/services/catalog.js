@@ -3,6 +3,7 @@
 const { cacheSave, cacheGet } = require('@utils/redis')
 const { internalRequests } = require('@helpers/requests')
 const { itemQueries } = require('@database/storage/item/queries')
+const { indexDocument }  = require('@utils/elasticsearch')
 
 const categoriesFlattener = (categories) => {
 	return categories.map((category) => {
@@ -48,6 +49,7 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 				name: provider.descriptor.name,
 			}
 			for (const item of provider.items) {
+				indexDocument('item-raw-index', item.id, item);
 				const itemId = item.id
 				const categoryIds = item.category_ids.map((categoryId) => {
 					return categoryId.replace(/ /g, '-').toLowerCase()
@@ -91,6 +93,7 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 					session.customer = itemFulfillment.customer
 					delete session.fulfillment.customer
 				}
+				// Not needed to save in redis instead use elasticsearch
 				await cacheSave(`SESSION:${itemId}`, session)
 				/* const response = await internalRequests.recommendationPOST({
 					route: process.env.RECOMMENDATION_ADD_ITEM,
@@ -98,12 +101,19 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 						payload: session,
 					},
 				}) */
+				// Elastic Search ingestion
+				// client.index({
+				// 	index: 'item-index',
+				// 	body: session,
+				// 	id: itemId
+				//   })
+				indexDocument('item-index', itemId, session)
 				const { storedItem } = await itemQueries.findOrCreate({
 					where: { itemId },
 					defaults: { details: JSON.stringify(session), bppMongoId },
 				})
 				/* if (!response.status) throw 'Neo4j Item Injection Failed' */
-				await cacheSave(`SESSION:BPP_ID:${itemId}`, bppMongoId)
+				// await cacheSave(`SESSION:BPP_ID:${itemId}`, bppMongoId)
 				const sessionsList = await cacheGet(`SESSION_LIST:${transactionId}`)
 				if (!sessionsList) await cacheSave(`SESSION_LIST:${transactionId}`, [itemId])
 				else {

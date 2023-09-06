@@ -1,5 +1,56 @@
 version: '3'
 services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.2
+    environment:
+      - "discovery.type=single-node"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "xpack.security.enabled=false"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - c4gt_mentoring_net
+    logging:
+      driver: none
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.5.2
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - c4gt_mentoring_net
+    depends_on:
+      - elasticsearch
+  postgres:
+    image: 'postgres'
+    container_name: c4gt-mentoring-postgres
+    restart: 'always'
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+    networks:
+      - c4gt_mentoring_net
+    logging:
+      driver: none
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: c4gt-pgadmin
+    restart: always
+    ports:
+      - "5000:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=agaraman0@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    networks:
+      - c4gt_mentoring_net
+    logging:
+      driver: none
   mongo:
     image: 'mongo:4.4.14'
     container_name: c4gt-mentoring-mongo
