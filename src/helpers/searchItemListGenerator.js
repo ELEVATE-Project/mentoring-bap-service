@@ -1,17 +1,13 @@
 'use strict'
 const { cacheGet } = require('@utils/redis')
 const rfdc = require('rfdc')()
-const { getDocumentById } = require('@utils/elasticsearch')
 const { internalRequests } = require('@helpers/requests')
 
 exports.searchItemListGenerator = async (transactionId, type) => {
 	try {
 		const itemList = await cacheGet(`SESSION_LIST:${transactionId}`)
-		// Instead of reading from redis use elasticsearch
 		const items = await Promise.all(
 			itemList.map(async (itemId) => {
-				// return await cacheGet(`SESSION:${itemId}`)
-				//return await getDocumentById('item-index', itemId)
 				const item = await internalRequests.catalogGET({
 					route: process.env.BAP_CATALOG_GET_SESSION_ROUTE,
 					pathParams: { sessionId: itemId },

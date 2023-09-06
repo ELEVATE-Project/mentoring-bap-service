@@ -3,7 +3,6 @@
 const { cacheSave, cacheGet } = require('@utils/redis')
 const { internalRequests } = require('@helpers/requests')
 const { itemQueries } = require('@database/storage/item/queries')
-const { indexDocument } = require('@utils/elasticsearch')
 
 const categoriesFlattener = (categories) => {
 	return categories.map((category) => {
@@ -49,7 +48,6 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 				name: provider.descriptor.name,
 			}
 			for (const item of provider.items) {
-				/* indexDocument('item-raw-index', item.id, item) */
 				await internalRequests.catalogPOST({
 					route: process.env.BAP_CATALOG_INDEX_RAW_SESSION_ROUTE,
 					body: { session: item, sessionId: item.id },
@@ -97,7 +95,7 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 					session.customer = itemFulfillment.customer
 					delete session.fulfillment.customer
 				}
-				// Not needed to save in redis instead use elasticsearch
+
 				await cacheSave(`SESSION:${itemId}`, session)
 				/* const response = await internalRequests.recommendationPOST({
 					route: process.env.RECOMMENDATION_ADD_ITEM,
@@ -111,10 +109,6 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 				// 	body: session,
 				// 	id: itemId
 				//   })
-				/* console.log('BEFORE INDEXING')
-				console.log('ITEM ID: ', itemId, 'SESSION: ', session)
-				await indexDocument('item-index', itemId, session)
-				console.log('AFTER INDEXING') */
 				console.log({ session, itemId })
 				await internalRequests.catalogPOST({
 					route: process.env.BAP_CATALOG_INDEX_SESSION_ROUTE,
