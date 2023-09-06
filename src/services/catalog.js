@@ -3,7 +3,7 @@
 const { cacheSave, cacheGet } = require('@utils/redis')
 const { internalRequests } = require('@helpers/requests')
 const { itemQueries } = require('@database/storage/item/queries')
-const { indexDocument }  = require('@utils/elasticsearch')
+const { indexDocument } = require('@utils/elasticsearch')
 
 const categoriesFlattener = (categories) => {
 	return categories.map((category) => {
@@ -49,7 +49,7 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 				name: provider.descriptor.name,
 			}
 			for (const item of provider.items) {
-				indexDocument('item-raw-index', item.id, item);
+				indexDocument('item-raw-index', item.id, item)
 				const itemId = item.id
 				const categoryIds = item.category_ids.map((categoryId) => {
 					return categoryId.replace(/ /g, '-').toLowerCase()
@@ -107,7 +107,10 @@ const catalogHandler = async (providers, transactionId, bppMongoId) => {
 				// 	body: session,
 				// 	id: itemId
 				//   })
-				indexDocument('item-index', itemId, session)
+				console.log('BEFORE INDEXING')
+				console.log('ITEM ID: ', itemId, 'SESSION: ', session)
+				await indexDocument('item-index', itemId, session)
+				console.log('AFTER INDEXING')
 				const { storedItem } = await itemQueries.findOrCreate({
 					where: { itemId },
 					defaults: { details: JSON.stringify(session), bppMongoId },

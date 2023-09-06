@@ -9,7 +9,6 @@ const app = express()
 require('@configs/')
 require('@utils/authentication')
 
-
 app.use(bodyParser.urlencoded({ extended: true, limit: '50MB' }))
 app.use(bodyParser.json({ limit: '50MB' }))
 app.use(cors())
