@@ -25,7 +25,7 @@ exports.search = async (req, res) => {
             route: process.env.BAP_CATALOG_SEARCH_SESSIONS_ROUTE,
             body: { filters: req.body },
         })
-        const sessionSources = sessions.map((session) => session._source)
+        const sessionSources = sessions?sessions.map((session) => session._source):[]
         /* console.log('SESSIONS: ', sessions)
         console.log('SESSION COUNT FROM ES:', sessions.length) */
         if (sessions && sessions.length >= process.env.BAP_MINIMUM_SESSION_COUNT_REQUIRED) {
