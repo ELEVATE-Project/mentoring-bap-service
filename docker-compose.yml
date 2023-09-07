@@ -1,5 +1,56 @@
 version: '3'
 services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.2
+    environment:
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "discovery.type=single-node"
+      - "xpack.security.enabled=false"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - c4gt_mentoring_net
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.5.2
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - c4gt_mentoring_net
+    depends_on:
+      - elasticsearch
+  postgres:
+    image: 'postgres'
+    container_name: c4gt-mentoring-postgres
+    restart: 'always'
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+    networks:
+      - c4gt_mentoring_net
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    logging:
+      driver: none
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: c4gt-pgadmin
+    restart: always
+    ports:
+      - "5000:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    networks:
+      - c4gt_mentoring_net
+    logging:
+      driver: none
   mongo:
     image: 'mongo:4.4.14'
     container_name: c4gt-mentoring-mongo
@@ -35,8 +86,20 @@ services:
       - redis
     networks:
       - c4gt_mentoring_net
+  mentoring-catalog-bap:
+    build: '../mentoring-bap-catalog-service/'
+    container_name: c4gt-mentoring-catalog-bap
+    image: c4gt/mentoring-catalog-bap:1.0
+    volumes:
+      - ../mentoring-bap-catalog-service/src/:/var/src
+    ports:
+      - '3009:3009'
+    command: [ 'nodemon', 'app.js' ]
+    networks:
+      - c4gt_mentoring_net
 networks:
   c4gt_mentoring_net:
     external: false
 volumes:
   mongo-data:
+  pg_data:

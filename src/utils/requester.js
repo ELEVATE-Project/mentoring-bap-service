@@ -7,6 +7,12 @@ const httpsAgent = new https.Agent({ rejectUnauthorized: false }) */
 
 exports.postRequest = async (baseURL, route, headers = {}, body) => {
 	try {
+		console.log({
+			baseURL,
+			route,
+			headers,
+			body,
+		})
 		baseURL = baseURL.replace(/\/$/, '')
 		let url = baseURL + route
 		const response = await axios.post(url, body, { headers, timeout: 3000 })
