@@ -22,15 +22,17 @@ exports.search = async (req, res) => {
 		const context = await contextBuilder(transactionId, messageId, process.env.SEARCH_ACTION)
 		const message = isMentorSearch ? searchMentorMessageDTO(mentorName) : searchSessionMessageDTO(sessionTitle)
 		const sessions = await internalRequests.catalogPOST({
-			route: process.env.BAP_CATALOG_SEARCH_SESSIONS_ROUTE,
-			body: { filters: req.body },
-		})
-		console.log('SESSION COUNT FROM ES:', sessions.length)
-		if (sessions && sessions.length >= process.env.BAP_MINIMUM_SESSION_COUNT_REQUIRED) {
-			const listName = type === 'session' ? 'sessions' : 'mentors'
-			const items = await searchItemListGenerator(transactionId, type, sessions)
+            route: process.env.BAP_CATALOG_SEARCH_SESSIONS_ROUTE,
+            body: { filters: req.body },
+        })
+        const sessionSources = sessions.map((session) => session._source)
+        /* console.log('SESSIONS: ', sessions)
+        console.log('SESSION COUNT FROM ES:', sessions.length) */
+        if (sessions && sessions.length >= process.env.BAP_MINIMUM_SESSION_COUNT_REQUIRED) {
+            const listName = type === 'session' ? 'sessions' : 'mentors'
+            const items = await searchItemListGenerator(transactionId, type, sessionSources)
 
-			res.status(200).json({
+            res.status(200).json({
 				status: true,
 				message: 'Search Success',
 				data: {
